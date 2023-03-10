@@ -1,3 +1,7 @@
+// async emulator
+export const waait = () => new Promise((res) => setTimeout(res, Math.random() * 800));
+
+// HSL color gen
 const generateRandomColor = () => {
     const existingBudgetLength = fetchData('budgets')?.length ?? 0;
 
@@ -21,6 +25,20 @@ export const createBudget = ({ name, amount }) => {
     const existingBudgets = fetchData('budgets') ?? [];
 
     return localStorage.setItem('budgets', JSON.stringify([...existingBudgets, newItem]));
+};
+
+// create budget
+export const createExpense = ({ name, amount, budgetId }) => {
+    const newItem = {
+        id: crypto.randomUUID(),
+        name,
+        createdAt: Date.now(),
+        amount: +amount,
+        budgetId,
+    };
+    const existingExpenses = fetchData('expenses') ?? [];
+
+    return localStorage.setItem('expenses', JSON.stringify([...existingExpenses, newItem]));
 };
 
 // delete item
