@@ -1,5 +1,5 @@
 // rrd imports
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 // libraries
 import { toast } from 'react-toastify';
 // components
@@ -7,6 +7,7 @@ import AddBudgetForm from '../components/AddBudgetForm';
 import AddExpenseForm from '../components/AddExpenseForm';
 import BudgetItem from '../components/BudgetItem';
 import Intro from '../components/Intro';
+import Table from '../components/Table';
 // helper functions
 import { createBudget, createExpense, fetchData, waait } from '../helpers';
 
@@ -14,7 +15,8 @@ import { createBudget, createExpense, fetchData, waait } from '../helpers';
 export function dashboardLoader() {
     const userName = fetchData('userName');
     const budgets = fetchData('budgets');
-    return { userName, budgets };
+    const expenses = fetchData('expenses');
+    return { userName, budgets, expenses };
 }
 
 // action
@@ -55,7 +57,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-    const { userName, budgets } = useLoaderData();
+    const { userName, budgets, expenses } = useLoaderData();
 
     return (
         <>
@@ -77,6 +79,17 @@ const Dashboard = () => {
                                         <BudgetItem key={b.id} budget={b} />
                                     ))}
                                 </div>
+                                {expenses && expenses.length > 0 && (
+                                    <div className="grid-md">
+                                        <h2>Recent Expenses</h2>
+                                        <Table expenses={expenses.sort((a, b) => b.createdAt - a.createdAt).slice(0, 8)} />
+                                        {expenses.length > 0 && (
+                                            <Link className="btn btn--dark" to="expenses">
+                                                View All Expenses
+                                            </Link>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         ) : (
                             <div className="grid-sm">
