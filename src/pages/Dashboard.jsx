@@ -9,7 +9,7 @@ import BudgetItem from '../components/BudgetItem';
 import Intro from '../components/Intro';
 import Table from '../components/Table';
 // helper functions
-import { createBudget, createExpense, fetchData, waait } from '../helpers';
+import { createBudget, createExpense, deleteItem, fetchData, waait } from '../helpers';
 
 // Loader
 export function dashboardLoader() {
@@ -52,6 +52,15 @@ export async function dashboardAction({ request }) {
             return toast.success(`Expense ${values.newExpense} Added!`);
         } catch (error) {
             throw new Error('There was a problem adding that expense :(');
+        }
+    }
+    // Delete Expense
+    if (_action === 'deleteExpense') {
+        try {
+            deleteItem({ key: 'expenses', id: values.expenseId });
+            return toast.success(`Expense Deleted!`);
+        } catch (error) {
+            throw new Error('There was a problem deleting that expense :(');
         }
     }
 }
