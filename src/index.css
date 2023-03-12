@@ -598,3 +598,35 @@ table a {
 .Toastify__toast-body {
     font-size: var(--fs-300);
 }
+
+/* info button */
+.btn--info {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn--info2 {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 5.5rem;
+    width: auto;
+    height: 3rem;
+    border-radius: 1000vw;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+.btn--info2 a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #3e3f57;
+}

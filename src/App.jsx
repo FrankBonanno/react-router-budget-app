@@ -13,6 +13,7 @@ import BudgetPage, { budgetAction, budgetLoader } from './pages/BudgetPage';
 import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
 import Error from './pages/Error';
 import ExpensesPages, { expensesAction, expensesLoader } from './pages/ExpensesPages';
+import InfoButton from './components/InfoButton';
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,7 @@ function App() {
     return (
         <div className="App">
             <RouterProvider router={router} />
+            <InfoButton />
             <ToastContainer />
         </div>
     );
